@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 
 @Component({
   selector: 'game-board',
@@ -9,7 +9,14 @@ export class GameBoardComponent implements OnInit {
 
   constructor() { }
 
+  @Input() squares: string[] = []
+  @Output() onClick = new EventEmitter<number>()
+
   ngOnInit(): void {
+  }
+
+  handleClick(index: number) {
+    this.onClick.emit(index)
   }
 
 }

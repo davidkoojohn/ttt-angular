@@ -1,9 +1,9 @@
-<p>game-board works!</p>
-<game-square></game-square>
-<game-square></game-square>
-<game-square></game-square>
-<game-square></game-square>
-<game-square></game-square>
-<game-square></game-square>
-<game-square></game-square>
+<div class="board">
+  <game-square
+    *ngFor="let item of squares; let index = index"
+    [value]="item"
+    [index]="index"
+    (onClick)="handleClick($event)"
+  ></game-square>
+</div>
 

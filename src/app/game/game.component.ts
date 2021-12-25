@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-game',
@@ -7,9 +7,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GameComponent implements OnInit {
 
-  constructor() { }
+  constructor() {}
+
+  private xIsNextPlayer: boolean = true
+  squares: string[] = new Array(9).fill(null)
+  title: string = "Next player is: X"
 
   ngOnInit(): void {
   }
 
+  handleClick(index: number) {
+    this.squares[index] = this.xIsNextPlayer ? "X" : "O"
+    this.xIsNextPlayer = !this.xIsNextPlayer
+    if (this.xIsNextPlayer) {
+      this.title = "Next player is: X"
+    } else {
+      this.title = "Next player is: O"
+    }
+  }
 }

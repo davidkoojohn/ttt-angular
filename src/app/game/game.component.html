@@ -1,2 +1,2 @@
-<p>game works!</p>
-<game-board></game-board>
+<h3>{{ title }}</h3>
+<game-board [squares]="squares" (onClick)="handleClick($event)"></game-board>
