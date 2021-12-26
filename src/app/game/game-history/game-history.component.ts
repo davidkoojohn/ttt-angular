@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { IGameHistory } from "../Game"
 
 @Component({
@@ -12,7 +12,13 @@ export class GameHistoryComponent implements OnInit {
 
   @Input() histories: IGameHistory[] = []
 
+  @Output() onClick = new EventEmitter<number>()
+
   ngOnInit(): void {
+  }
+
+  handleClick(step: number) {
+    this.onClick.emit(step)
   }
 
 }

@@ -12,7 +12,6 @@ export class GameComponent implements OnInit {
 
   private xIsNextPlayer: boolean = true
   private scores: number[] = [8, 1, 6, 3, 5, 7, 4, 9, 2]
-  squares: string[] = new Array(9).fill(null)
   title: string = ""
   line: number[] = []
   histories: IGameHistory[] = [
@@ -22,6 +21,7 @@ export class GameComponent implements OnInit {
     }
   ]
   stepNumber: number = 0
+  squares: string[] = this.histories[this.stepNumber].squares
 
   ngOnInit(): void {
   }
@@ -38,20 +38,28 @@ export class GameComponent implements OnInit {
       this.title = `Winner is: ${ winner.val }`
       this.line = winner.line
     }
+    this.squares = this.histories[this.stepNumber].squares
   }
 
   handleClick(index: number) {
     if (this.squares[index] || this.calculateWinner()) {
       return
     }
-    this.squares[index] = this.xIsNextPlayer ? "X" : "O"
+    const temp = this.squares.slice()
+    temp[index] = this.xIsNextPlayer ? "X" : "O"
     this.stepNumber++
     this.xIsNextPlayer = (this.stepNumber % 2 === 0)
 
     this.histories.push({
-      squares: this.squares,
+      squares: temp,
       pos: index
     })
+  }
+
+  moveHistory(step: number) {
+    this.stepNumber = step
+    this.histories = this.histories.slice(0, step + 1)
+    console.log(this.histories)
   }
 
   private calculateWinner(): TWinner {

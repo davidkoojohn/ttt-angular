@@ -1,5 +1,7 @@
 <li>
-  <i>{{ index === 0 ? "" : index+"." }}</i>
-  <span>{{ posText() }}</span>
-  <button>Go To {{ index === 0 ? "start!" : "move #"+index }}</button>
+  <div>
+    <i>{{ index === 0 ? "" : index+"." }}</i>
+    <span>{{ posText() }}</span>
+  </div>
+  <button (click)="handleClick(index)">Go To {{ index === 0 ? "start!" : "move #"+index }}</button>
 </li>

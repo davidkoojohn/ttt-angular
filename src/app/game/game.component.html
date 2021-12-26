@@ -4,4 +4,7 @@
   [line]="line"
   (onClick)="handleClick($event)"
 ></game-board>
-<game-history [histories]="histories"></game-history>
+<game-history
+  [histories]="histories"
+  (onClick)="moveHistory($event)"
+></game-history>

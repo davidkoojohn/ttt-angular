@@ -3,5 +3,6 @@
     *ngFor="let item of histories; let index=index"
     [index]="index"
     [pos]="item.pos"
+    (onClick)="handleClick($event)"
   ></game-history-item>
 </ul>
