@@ -21,31 +21,30 @@ export class GameComponent implements OnInit {
     }
   ]
   stepNumber: number = 0
-  squares: string[] = this.histories[this.stepNumber].squares
+  current: string[] = this.histories[this.stepNumber].squares
 
   ngOnInit(): void {
   }
 
   ngDoCheck() {
+    this.current = this.histories[this.stepNumber].squares
     const winner = this.calculateWinner()
     if(!winner) {
-      if (this.squares.every(it => !!it)) {
+      this.line = []
+      if (this.current.every(it => !!it)) {
         this.title = "No Winner!"
       } else {
-        this.title = `Next player is: ${ this.xIsNextPlayer ? "X" : "O"}`
+        this.title = `Next player: ${ this.xIsNextPlayer ? "X" : "O"}`
       }
     } else {
       this.title = `Winner is: ${ winner.val }`
       this.line = winner.line
     }
-    this.squares = this.histories[this.stepNumber].squares
   }
 
   handleClick(index: number) {
-    if (this.squares[index] || this.calculateWinner()) {
-      return
-    }
-    const temp = this.squares.slice()
+    if (this.current[index] || this.calculateWinner()) return
+    const temp = this.current.slice()
     temp[index] = this.xIsNextPlayer ? "X" : "O"
     this.stepNumber++
     this.xIsNextPlayer = (this.stepNumber % 2 === 0)
@@ -59,23 +58,23 @@ export class GameComponent implements OnInit {
   moveHistory(step: number) {
     this.stepNumber = step
     this.histories = this.histories.slice(0, step + 1)
-    console.log(this.histories)
+    this.xIsNextPlayer = (this.stepNumber % 2 === 0)
   }
 
   private calculateWinner(): TWinner {
     let result!: TWinner
-    for (let i = 0; i < this.squares.length; i++) {
-      for (let j = 0; j < this.squares.length; j++) {
-        for (let k = 0; k < this.squares.length; k++) {
+    for (let i = 0; i < this.current.length; i++) {
+      for (let j = 0; j < this.current.length; j++) {
+        for (let k = 0; k < this.current.length; k++) {
           if (
-            this.squares[i]
-            && (this.squares[i] === this.squares[j])
-            && (this.squares[i] === this.squares[k])
+            this.current[i]
+            && (this.current[i] === this.current[j])
+            && (this.current[i] === this.current[k])
             && (i < j &&  j < k)
             && (+this.scores[i] + +this.scores[j] + +this.scores[k] === 15)
           ) {
             result = {
-              val: this.squares[i],
+              val: this.current[i],
               line: [i, j, k]
             }
             break
