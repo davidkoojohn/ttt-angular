@@ -1,9 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
-type TWinner = {
-  val: string
-  line: number[]
-}
+import { IGameHistory, TWinner } from "./Game"
 
 @Component({
   selector: 'app-game',
@@ -19,6 +15,13 @@ export class GameComponent implements OnInit {
   squares: string[] = new Array(9).fill(null)
   title: string = ""
   line: number[] = []
+  histories: IGameHistory[] = [
+    {
+      squares:  new Array(9).fill(null),
+      pos: 0
+    }
+  ]
+  stepNumber: number = 0
 
   ngOnInit(): void {
   }
@@ -42,7 +45,13 @@ export class GameComponent implements OnInit {
       return
     }
     this.squares[index] = this.xIsNextPlayer ? "X" : "O"
-    this.xIsNextPlayer = !this.xIsNextPlayer
+    this.stepNumber++
+    this.xIsNextPlayer = (this.stepNumber % 2 === 0)
+
+    this.histories.push({
+      squares: this.squares,
+      pos: index
+    })
   }
 
   private calculateWinner(): TWinner {
