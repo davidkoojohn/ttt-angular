@@ -1,2 +1,6 @@
 <h3>{{ title }}</h3>
-<game-board [squares]="squares" (onClick)="handleClick($event)"></game-board>
+<game-board
+  [squares]="squares"
+  [line]="line"
+  (onClick)="handleClick($event)"
+></game-board>

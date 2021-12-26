@@ -3,6 +3,7 @@
     *ngFor="let item of squares; let index = index"
     [value]="item"
     [index]="index"
+    [line]="line"
     (onClick)="handleClick($event)"
   ></game-square>
 </div>

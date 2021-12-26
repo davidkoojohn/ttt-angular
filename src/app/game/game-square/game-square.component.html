@@ -1,1 +1,4 @@
-<button (click)="handleClick()">{{ value }}</button>
+<button
+  [class.red]="isRed()"
+  (click)="handleClick()"
+>{{ value }}</button>

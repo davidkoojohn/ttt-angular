@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 type TWinner = {
   val: string
-  pos: number[]
+  line: number[]
 }
 
 @Component({
@@ -18,6 +18,7 @@ export class GameComponent implements OnInit {
   private scores: number[] = [8, 1, 6, 3, 5, 7, 4, 9, 2]
   squares: string[] = new Array(9).fill(null)
   title: string = ""
+  line: number[] = []
 
   ngOnInit(): void {
   }
@@ -25,9 +26,14 @@ export class GameComponent implements OnInit {
   ngDoCheck() {
     const winner = this.calculateWinner()
     if(!winner) {
-      this.title = `Next player is: ${ this.xIsNextPlayer ? "X" : "O"}`
+      if (this.squares.every(it => !!it)) {
+        this.title = "No Winner!"
+      } else {
+        this.title = `Next player is: ${ this.xIsNextPlayer ? "X" : "O"}`
+      }
     } else {
       this.title = `Winner is: ${ winner.val }`
+      this.line = winner.line
     }
   }
 
@@ -39,18 +45,21 @@ export class GameComponent implements OnInit {
     this.xIsNextPlayer = !this.xIsNextPlayer
   }
 
-  calculateWinner(): TWinner {
+  private calculateWinner(): TWinner {
     let result!: TWinner
     for (let i = 0; i < this.squares.length; i++) {
       for (let j = 0; j < this.squares.length; j++) {
         for (let k = 0; k < this.squares.length; k++) {
           if (
-            this.squares[i] && this.squares[j] && this.squares[k] &&
-            (i > j &&  j > k) &&
-            (+this.scores[i] + +this.scores[j] + +this.scores[k] === 15)) {
+            this.squares[i]
+            && (this.squares[i] === this.squares[j])
+            && (this.squares[i] === this.squares[k])
+            && (i < j &&  j < k)
+            && (+this.scores[i] + +this.scores[j] + +this.scores[k] === 15)
+          ) {
             result = {
               val: this.squares[i],
-              pos: [i, j, k]
+              line: [i, j, k]
             }
             break
           }

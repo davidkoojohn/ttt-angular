@@ -11,11 +11,16 @@ export class GameSquareComponent implements OnInit {
 
   @Input() value: string = ""
   @Input() index?: number
+  @Input() line?: number[]
 
   @Output()
   onClick = new EventEmitter<number>()
 
   ngOnInit(): void {
+  }
+
+  isRed() {
+    return (this.index || this.index === 0) && this.line && this.line.includes(this.index)
   }
 
   handleClick() {

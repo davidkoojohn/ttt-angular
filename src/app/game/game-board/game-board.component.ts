@@ -10,6 +10,7 @@ export class GameBoardComponent implements OnInit {
   constructor() { }
 
   @Input() squares: string[] = []
+  @Input() line: number[] = []
   @Output() onClick = new EventEmitter<number>()
 
   ngOnInit(): void {
