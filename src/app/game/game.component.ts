@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IGameHistory, TWinner } from "./Game"
+import { IGameHistory, TWinner } from "./game"
 
 @Component({
   selector: 'app-game',

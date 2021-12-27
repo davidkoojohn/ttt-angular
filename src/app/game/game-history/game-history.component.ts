@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { IGameHistory } from "../Game"
+import { IGameHistory } from "../game"
 
 @Component({
   selector: 'game-history',
