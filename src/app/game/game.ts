@@ -9,8 +9,3 @@ export interface IGameHistory {
   squares: string[]
   pos: TPos
 }
-
-export interface INextStep {
-  current: string[]
-  nextPlayer: string
-}

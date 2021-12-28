@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import {IGameHistory, INextStep, TWinner} from "./game";
-import {Observable, of} from "rxjs"
+import {IGameHistory, TWinner} from "./game";
 
 @Injectable({
   providedIn: 'root'
