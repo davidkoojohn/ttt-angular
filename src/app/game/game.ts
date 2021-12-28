@@ -3,7 +3,14 @@ export type TWinner = {
   line: number[]
 }
 
+type TPos = number | null
+
 export interface IGameHistory {
   squares: string[]
-  pos: number
+  pos: TPos
+}
+
+export interface INextStep {
+  current: string[]
+  nextPlayer: string
 }

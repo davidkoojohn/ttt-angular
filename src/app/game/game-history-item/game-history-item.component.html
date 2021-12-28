@@ -3,5 +3,7 @@
     <i>{{ index === 0 ? "" : index+"." }}</i>
     <span>{{ posText() }}</span>
   </div>
-  <button (click)="handleClick(index)">Go To {{ index === 0 ? "start!" : "move #"+index }}</button>
+  <button (click)="handleClick(index)">
+    {{ btnText() }}
+  </button>
 </li>

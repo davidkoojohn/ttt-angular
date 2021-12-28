@@ -1,24 +1,26 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component } from '@angular/core';
 import { IGameHistory } from "../game"
+import { GameService } from "../game.service"
 
 @Component({
   selector: 'game-history',
   templateUrl: './game-history.component.html',
   styleUrls: ['./game-history.component.less']
 })
-export class GameHistoryComponent implements OnInit {
+export class GameHistoryComponent {
 
-  constructor() { }
+  constructor(
+    private gameService: GameService
+  ) { }
 
-  @Input() histories: IGameHistory[] = []
+  history: IGameHistory[] = []
 
-  @Output() onClick = new EventEmitter<number>()
-
-  ngOnInit(): void {
+  ngDoCheck() {
+    this.history = this.gameService.getHistory()
   }
 
   handleClick(step: number) {
-    this.onClick.emit(step)
+    this.gameService.moveHistory(step)
   }
 
 }

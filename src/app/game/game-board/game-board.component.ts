@@ -1,23 +1,26 @@
-import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import { Component } from '@angular/core';
+import { GameService } from "../game.service";
 
 @Component({
   selector: 'game-board',
   templateUrl: './game-board.component.html',
   styleUrls: ['./game-board.component.less']
 })
-export class GameBoardComponent implements OnInit {
+export class GameBoardComponent {
 
-  constructor() { }
+  constructor(
+    private gameService: GameService
+  ) { }
 
-  @Input() squares: string[] = []
-  @Input() line: number[] = []
-  @Output() onClick = new EventEmitter<number>()
+  squares: string[] = []
+  line: number[] = []
 
-  ngOnInit(): void {
+  ngDoCheck() {
+    this.squares = this.gameService.getCurrentHistory()
+    this.line = this.gameService.getLine()
   }
 
   handleClick(index: number) {
-    this.onClick.emit(index)
+    this.gameService.addHistory(index)
   }
-
 }

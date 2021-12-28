@@ -1,10 +1,3 @@
-<h3>{{ title }}</h3>
-<game-board
-  [squares]="current"
-  [line]="line"
-  (onClick)="handleClick($event)"
-></game-board>
-<game-history
-  [histories]="histories"
-  (onClick)="moveHistory($event)"
-></game-history>
+<h3>{{ gameService.title }}</h3>
+<game-board></game-board>
+<game-history></game-history>
