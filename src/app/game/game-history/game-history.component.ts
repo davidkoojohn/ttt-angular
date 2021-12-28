@@ -14,9 +14,11 @@ export class GameHistoryComponent {
   ) { }
 
   history: IGameHistory[] = []
+  stepNumber: number = 0
 
   ngDoCheck() {
     this.history = this.gameService.getHistory()
+    this.stepNumber = this.gameService.stepNumber
   }
 
   handleClick(step: number) {

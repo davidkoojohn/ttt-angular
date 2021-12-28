@@ -3,6 +3,7 @@
     *ngFor="let item of history; let index=index"
     [index]="index"
     [pos]="item.pos"
+    [isActive]="stepNumber === index"
     (onClick)="handleClick($event)"
   ></game-history-item>
 </ul>

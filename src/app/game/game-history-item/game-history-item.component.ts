@@ -11,6 +11,7 @@ export class GameHistoryItemComponent {
 
   @Input() index: number = 0
   @Input() pos: number|null = null
+  @Input() isActive: boolean = false
   @Output() onClick = new EventEmitter<number>()
 
   handleClick(step: number) {
